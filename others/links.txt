@@ -1,7 +1,0 @@
-Axios - Comunicacion con la API
-https://www.youtube.com/watch?v=k8hrLNnhZS4
-
-Composables - Una funcion que se usa como un componente
-
-Puedo hacer un loader facilmente con un suspense componente
-https://www.youtube.com/watch?v=2wh4feX5LfU
