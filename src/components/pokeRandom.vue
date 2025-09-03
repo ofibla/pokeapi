@@ -1,9 +1,11 @@
 <template>
-    <div class="self-center flex items-center justify-center flex-col h-100 w-150">
-        <img :src="pokImg" alt="Pokemon" />
-        <p class="capitalize"> {{ pokName }}</p>
-        <img v-for="(type, i) in pokTypes" :src="pokTypeSprites[i]" :alt="type.type.name" />
-        <button @click="fetchPokemon()">NewPokemon</button>
+    <div>
+        <p class="capitalize text-2xl bg-[#efefbf] p-2 pl-7 pr-7 rounded-xl border-2 border-[#baba79]"> <strong>{{ pokName }}</strong></p>
+        <img :src="pokImg" alt="Pokemon" class="min-h-30 bg-grey-600 m-7" />
+        <div class="min-h-10 flex flex-row gap-2">
+            <img v-for="(type, i) in pokTypes" :src="pokTypeSprites[i]" :alt="type.type.name" class="object-cover rounded-xl"/>
+        </div>
+        <button @click="fetchPokemon()" class="bg-[#efefbf] border-2 border-[#baba79] hover:bg-[#8b8b5a] hover:text-white font-bold py-2 px-4 rounded mt-5">New Pokemon</button>
     </div>
 </template>
 
@@ -12,7 +14,7 @@ import type { PokemonTypeIndividual, PokemonTypeResponse } from "@/interfaces/po
 import axios from "axios"
 import { ref } from "vue"
 
-//Posar aixo en un component
+//Posar aixo en un composable
 const pokName = ref('')
 const pokImg = ref('')
 const pokTypes = ref<any[]>([])
@@ -21,7 +23,7 @@ const pokTypeSprites = ref<string[]>([])
 
 async function fetchPokemon() {
     try {
-        const rand : Number = Math.floor(Math.random() * 1024)+1
+        const rand : Number = Math.floor(Math.random() * 1024)+1 // Fet per quintó
         const response  = await axios.get("https://pokeapi.co/api/v2/pokemon/" + rand);
         
 
