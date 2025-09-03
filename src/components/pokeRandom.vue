@@ -14,6 +14,8 @@ import type { PokemonTypeIndividual, PokemonTypeResponse } from "@/interfaces/po
 import axios from "axios"
 import { ref } from "vue"
 
+const apiUrl = import.meta.env.VITE_POKEAPI_URL
+
 //Posar aixo en un composable
 const pokName = ref('')
 const pokImg = ref('')
@@ -21,10 +23,11 @@ const pokTypes = ref<any[]>([])
 const pokTypeName = ref<string[]>([])
 const pokTypeSprites = ref<string[]>([])
 
+
 async function fetchPokemon() {
     try {
         const rand : Number = Math.floor(Math.random() * 1024)+1 // Fet per quintó
-        const response  = await axios.get("https://pokeapi.co/api/v2/pokemon/" + rand);
+        const response  = await axios.get(apiUrl +"pokemon/" + rand);
         
 
         pokName.value = response.data.name;
@@ -33,7 +36,8 @@ async function fetchPokemon() {
         
         for (let i = 0; i < pokTypes.value.length; i++) {
             pokTypeName.value[i] = pokTypes.value[i].type.name;
-            const pokTypeResponse = await axios.get<PokemonTypeResponse>("https://pokeapi.co/api/v2/type");
+            const pokTypeResponse = await axios.get<PokemonTypeResponse>(apiUrl + "type");
+            //Busca un objecte que coincidixque en el nom del tipo del pokemon
             const pokTypeObj = pokTypeResponse.data.results.find(result => result.name === pokTypeName.value[i]);
 
             if (pokTypeObj && pokTypeObj.url) {
