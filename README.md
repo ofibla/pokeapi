@@ -1,24 +1,10 @@
-# pokeapi
+# Pokedex (PokeAPI)
 
-## Project setup
-```
-npm install
-```
+## How to use:
+1. Go to the .env.example file 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+2. "VITE_POKEAPI_URL =" assign the pokeAPI url here
 
-### Compiles and minifies for production
-```
-npm run build
-```
+3. Change the name of the file to .env
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+4. Have fun
