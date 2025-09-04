@@ -6,7 +6,5 @@
 </template>
 
 <script setup lang="ts">
-import useFetchPokemon  from '@composables/UseFetchPokemon'
-
-const {errorCatched} = useFetchPokemon()
+defineProps<{ errorCatched: string }>()
 </script>

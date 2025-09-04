@@ -48,6 +48,7 @@ export default function useFetchPokemon() {
             isLoading.value = false
 
         } catch (error: any) {
+            
             errorCatched.value = error.message
             isError.value = true
             isLoading.value = false
