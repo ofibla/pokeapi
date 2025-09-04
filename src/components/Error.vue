@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import useFetchPokemon  from '@composables/useFetchPokemon'
+import useFetchPokemon  from '@composables/UseFetchPokemon'
 
 const {errorCatched} = useFetchPokemon()
 </script>
