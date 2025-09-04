@@ -19,9 +19,13 @@ export default function useFetchPokemon() {
     async function fetchPokemon() {
         try {
             isLoading.value = true
-            await new Promise(resolve => setTimeout(resolve, 1100)); // Timer de 1s pa que se veigue lo loader
+            const api = axios.create({
+                baseURL: API_URL,
+                timeout: 1000
+            });
+            
             const rand : Number = Math.floor(Math.random() * 1024)+1 // Fet per quintó
-            const response  = await axios.get(API_URL +"pokemon/" + rand);
+            const response  = await api.get("pokemon/" + rand);
             
 
             pokName.value = response.data.name;
