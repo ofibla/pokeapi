@@ -9,7 +9,6 @@
             :isLoading="isLoading"
             :fetchPokemon="fetchPokemon"
         ></Pokemon>
-        <SideBar></SideBar>
         <TopBar></TopBar>
     </div>
     
@@ -18,7 +17,6 @@
 <script setup lang="ts">
 import Pokemon from '@components/PokeRandom.vue';
 import Error from '@components/Error.vue';
-import SideBar from '@components/SideBar.vue'
 import TopBar from '@components/TopBar.vue'
 
 import useFetchPokemon  from './composables/UseFetchPokemon'
