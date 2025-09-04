@@ -53,10 +53,7 @@ export default function useFetchPokemon() {
             isLoading.value = false
         }
     }
-
     
-    fetchPokemon();
-
     return {
         pokImg, 
         pokTypes, 

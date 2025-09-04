@@ -16,7 +16,21 @@
 import useFetchPokemon  from '../composables/UseFetchPokemon'
 import Loading from '@components/Loading.vue'
 import Btn from '@components/Button.vue'
-const {pokImg, pokTypes, pokTypeSprites, pokName, isLoading, fetchPokemon} = useFetchPokemon()
+import { onMounted } from 'vue'
+
+const {
+    pokImg, 
+    pokTypes, 
+    pokTypeSprites, 
+    pokName, 
+    isLoading, 
+    fetchPokemon
+} = useFetchPokemon()
+
+onMounted(() => {
+    fetchPokemon()
+})
+
 </script>
 
 
