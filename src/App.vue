@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import pokemon from './components/pokeRandom.vue';
-import error from './components/error.vue';
+import pokemon from '@components/pokeRandom.vue';
+import error from '@components/error.vue';
 import useFetchPokemon  from './composables/useFetchPokemon'
 
 const { isError } = useFetchPokemon()
