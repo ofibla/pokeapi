@@ -2,7 +2,7 @@ import {ref} from 'vue'
 import type { PokemonTypeIndividual, PokemonTypeResponse } from "@/interfaces/pokemon.interfaces"
 import axios from "axios"
 
-const apiUrl = import.meta.env.VITE_POKEAPI_URL
+const API_URL = import.meta.env.VITE_POKEAPI_URL
 
 export default function useFetchPokemon() {
     const pokName = ref('')
@@ -10,14 +10,18 @@ export default function useFetchPokemon() {
     const pokTypes = ref<any[]>([])
     const pokTypeName = ref<string[]>([])
     const pokTypeSprites = ref<string[]>([])
+
     const isLoading = ref(true)
+
+    const isError = ref(false)
+    const errorCatched = ref<string>('')
 
     async function fetchPokemon() {
         try {
             isLoading.value = true
             await new Promise(resolve => setTimeout(resolve, 1100)); // Timer de 1s pa que se veigue lo loader
             const rand : Number = Math.floor(Math.random() * 1024)+1 // Fet per quintó
-            const response  = await axios.get(apiUrl +"pokemon/" + rand);
+            const response  = await axios.get(API_URL +"pokemon/" + rand);
             
 
             pokName.value = response.data.name;
@@ -26,7 +30,7 @@ export default function useFetchPokemon() {
             
             for (let i = 0; i < pokTypes.value.length; i++) {
                 pokTypeName.value[i] = pokTypes.value[i].type.name;
-                const pokTypeResponse = await axios.get<PokemonTypeResponse>(apiUrl + "type");
+                const pokTypeResponse = await axios.get<PokemonTypeResponse>(API_URL + "type");
                 //Busca un objecte que coincidixque en el nom del tipo del pokemon
                 const pokTypeObj = pokTypeResponse.data.results.find(result => result.name === pokTypeName.value[i]);
 
@@ -38,8 +42,10 @@ export default function useFetchPokemon() {
                 }
             }
             isLoading.value = false
-        } catch (error) {
-            console.error(error);
+
+        } catch (error: any) {
+            errorCatched.value = error.message
+            isError.value = true
             isLoading.value = false
         }
     }
@@ -53,6 +59,8 @@ export default function useFetchPokemon() {
         pokTypeSprites, 
         pokName,
         isLoading,
+        isError,
+        errorCatched,
         fetchPokemon
     }
 }
