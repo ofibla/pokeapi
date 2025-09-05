@@ -1,2 +1,7 @@
 Style add trainer form
 Add style on active page button
+
+Add a way to assign a pokemon
+Add a way to remove and edit the trainers
+
+Add a modal to confirm the remove of a trainer
