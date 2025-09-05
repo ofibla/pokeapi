@@ -1,0 +1,2 @@
+Style add trainer form
+Add style on active page button

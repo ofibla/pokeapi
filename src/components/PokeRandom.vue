@@ -16,7 +16,7 @@
 import Loading from '@components/ui/Loading.vue'
 import Btn from '@components/ui/Button.vue'
 import { onMounted } from 'vue'
-import mainDiv from './ui/mainDiv.vue'
+import mainDiv from './ui/MainDiv.vue'
 
 const props = defineProps<{
     pokImg: string,
