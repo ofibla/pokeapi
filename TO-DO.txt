@@ -5,3 +5,6 @@ Add a way to assign a pokemon
 Add a way to remove and edit the trainers
 
 Add a modal to confirm the remove of a trainer
+
+Fix strange git error when pushing
+Fix strange error on imports

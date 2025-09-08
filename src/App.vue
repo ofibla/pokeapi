@@ -9,7 +9,10 @@
             :isLoading="isLoading"
             :fetchPokemon="fetchPokemon"
         ></Pokemon>
-        <TrainersList v-else-if="!isError && isTrainersList"></TrainersList>
+        <TrainersList v-else-if="!isError && isTrainersList"
+            :pokImg="pokImg"
+            :fetchPokemon="fetchPokemon"
+        ></TrainersList>
         <AddTrainers v-else-if="!isError && isAddTrainer"></AddTrainers>
         <TopBar @changePage="changePage"></TopBar>
     </div>
@@ -27,7 +30,7 @@ import TrainersList from '@components/TrainersList.vue';
 import Pokemon from '@components/PokeRandom.vue';
 
 
-import useFetchPokemon  from './composables/UseFetchPokemon'
+import useFetchPokemon  from './composables/UseFetchPokemon.ts'
 
 
 const isPokemon = ref(true)

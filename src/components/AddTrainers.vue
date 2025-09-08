@@ -2,9 +2,9 @@
   <MainDiv class="w-100 h-120">
     <MainTitle>Add Trainer</MainTitle>
     <form @submit.prevent="submitTrainer" class="mt-3 grid grid-cols-1 grid-rows-5 items-center">
-      <addTrainerLabel>Name: <input class="rounded" v-model="trainerForm.name" placeholder="Edu"></input></addTrainerLabel>
+      <addTrainerLabel>Name: <input class="rounded" v-model="trainerForm.name" placeholder="Edu" required ></input></addTrainerLabel>
       <addTrainerLabel>Surname: <input class="rounded" v-model="trainerForm.lastName" placeholder="Quintó"></input></addTrainerLabel>
-      <addTrainerLabel>DNI: <input class="rounded" v-model="trainerForm.dni" placeholder="1234578N"></input></addTrainerLabel>
+      <addTrainerLabel>DNI: <input class="rounded" v-model="trainerForm.dni" placeholder="1234578N" required></input></addTrainerLabel>
       <addTrainerLabel >Email: <input class="rounded" v-model="trainerForm.email" placeholder="example@example.com"></input></addTrainerLabel>
       <btn class="text-2xl w-50 mx-auto ">Submit</btn>
     </form>

@@ -16,7 +16,7 @@ export default function useFetchPokemon() {
     const isError = ref(false)
     const errorCatched = ref<string>('')
 
-    async function fetchPokemon() {
+    async function fetchPokemon(){
         try {
             isLoading.value = true
             const api = axios.create({
