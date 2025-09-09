@@ -5,7 +5,7 @@
             <h2> <strong>Pokedex</strong> </h2>
         </div>
         <div class="gap-10 w-2/3 flex justify-end text-gray-800 text-2xl pr-15 " >
-            <btn @click="changePage(button )" v-for="button in buttons">
+            <btn @click="changePage(button )" v-for="button in buttons" :class="{'scale-120': activePage === button, 'transition-transform duration-200': true}">
                 <p> {{ button }} </p>
             </btn>  
             
@@ -17,6 +17,7 @@
 import {ref} from 'vue'
 import btn from '@components/ui/TopBarButton.vue'
 
+const activePage = ref('Pokemon')
 const buttons = ref([
     'Trainers',
     'Add Trainer',
@@ -26,6 +27,7 @@ const buttons = ref([
 const emit = defineEmits(['changePage'])
 
 function changePage(btn : string){
+    activePage.value = btn
     emit('changePage', btn)
 }
 
