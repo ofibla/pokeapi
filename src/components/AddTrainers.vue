@@ -1,7 +1,7 @@
 <template>
   <MainDiv class="w-100 h-120">
     <MainTitle>Add Trainer</MainTitle>
-    <form @submit.prevent="submitTrainer" class="mt-3 grid grid-cols-1 grid-rows-5 items-center">
+    <form ref="myForm" @submit.prevent="submitTrainer" class="mt-3 grid grid-cols-1 grid-rows-5 items-center">
       <addTrainerLabel>Name: <input class="rounded" v-model="trainerForm.name" placeholder="Edu" required ></input></addTrainerLabel>
       <addTrainerLabel>Surname: <input class="rounded" v-model="trainerForm.lastName" placeholder="Quintó"></input></addTrainerLabel>
       <addTrainerLabel>DNI: <input class="rounded" v-model="trainerForm.dni" placeholder="1234578N" required></input></addTrainerLabel>
@@ -39,6 +39,14 @@ function submitTrainer(){
     ...trainerForm.value
   }
   trainersStore.addTrainer(newTrainer)
+  trainerForm.value = {
+    id: Date.now().toString(),
+    name: '',
+    lastName: '',
+    dni: '',
+    email: '',
+    pokemon: null
+  }
 }
 
 </script>

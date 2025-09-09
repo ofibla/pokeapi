@@ -1,6 +1,6 @@
 <template>
     <loading v-if="isLoading"></loading>
-    <mainDiv v-else class="w-80">
+    <mainDiv v-else class="w-80 h-100">
         <p class="capitalize text-2xl bg-[#efefbf] p-2 pl-7 pr-7 rounded-xl border-2 border-[#baba79]"> <strong>{{ pokName }}</strong></p>
         <img :src="pokImg" alt="Pokemon" class="min-h-50 bg-grey-600 " />
         <div class="max-h-7 flex flex-row justify-center gap-2">
