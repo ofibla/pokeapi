@@ -1,5 +1,5 @@
 <template>
-    <div class="w-screen h-screen fixed flex items-center justify-center">
+    <div class="w-screen h-screen fixed flex items-center justify-center bg-black/30">
         <MainDiv class=" w-80 h-40">
             <MainTitle>Are you sure ?</MainTitle>
             <div class="flex gap-5  mt-5 w-50 h-20 justify-center">

@@ -38,7 +38,6 @@ export const useTrainersStore = defineStore('trainers', () => {
 
     function update(updatedTrainer:any){
         const trainer = trainers.value.find(trainer => updatedTrainer.id === trainer.id);
-        console.log("the hell")
         if(trainer){
             Object.assign(trainer, updatedTrainer)
         }

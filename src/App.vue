@@ -37,8 +37,6 @@ const isPokemon = ref(true)
 const isAddTrainer = ref(false)
 const isTrainersList = ref(false) 
 
-const currentPage = ref('')
-
 const {
     pokImg, 
     pokTypes, 
