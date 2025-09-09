@@ -1,6 +1,5 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { defineStore } from 'pinia';
-import { moveEmitHelpers } from 'typescript';
 
 interface Trainer {
     id: string,
@@ -15,7 +14,18 @@ export const useTrainersStore = defineStore('trainers', () => {
     
     //State
     const trainers  = ref<Trainer[]>([]);
-    
+
+    //Load from local storage
+    const saved = localStorage.getItem('trainers')
+    if (saved){
+        trainers.value = JSON.parse(saved)
+    }
+
+    //Save to local storage when change
+    watch(trainers, (newVal) => {
+        localStorage.setItem('trainers', JSON.stringify(newVal))
+    }, { deep: true }) //Assegura que se guardan cambios internos en los objetos
+
     //Actions
     function addTrainer(trainer: Trainer) {
         trainers.value.push(trainer);

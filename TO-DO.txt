@@ -1,8 +1,5 @@
-Fix the delete confirmation modal
-
 Add the name of the assigned pokemon when hover
 
 Add style on active page button
 
-Fix strange git error when pushing
 Fix strange error on imports    
