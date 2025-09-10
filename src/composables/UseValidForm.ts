@@ -1,32 +1,24 @@
 import { computed } from 'vue'
-import type { Ref } from 'vue'
-import type { Trainer } from '@/interfaces/trainers.interface'
 
-export function useValidForm(trainerForm: Ref<Trainer>) {
-  function validEmail(email: string): boolean {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return re.test(email)
-  }
+export function useValidForm(formInput: any) {
 
 
   const errors = computed(() => {
     const errs: string[] = []
-    const form = trainerForm.value
-    const regExNameSurname = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]+$/
+    const form = formInput.value
+
+    const regExOnlyLetters = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]+$/
     const regExDni = /^[0-9]{8}[A-Za-z]$/
+    const regExEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-    if (!form.name) errs.push('The name is required')
-    if (!regExNameSurname.test(form.name)) errs.push("The name can't have numbers")
-    if (!form.lastName) errs.push('The surname is required')
-    if (!regExNameSurname.test(form.lastName)) errs.push("The last name can't have numbers")
+    if (!form.name || !form.lastName || !form.dni || !form.email) errs.push('All fields are required')
+    
+    if (!regExOnlyLetters.test(form.name)) errs.push("The name can't have numbers")
+    if (!regExOnlyLetters.test(form.lastName)) errs.push("The last name can't have numbers")
 
-    if (!form.dni) errs.push('The DNI is required')
     if (!regExDni.test(form.dni)) errs.push('The DNI must be valid')
-    if (!form.email) {
-      errs.push('The Email is required')
-    } else if (!validEmail(form.email)) {
-      errs.push('The Email must be valid')
-    }
+
+    if (!regExEmail.test(form.email)) errs.push('The Email must be valid')
 
     return errs
   })
