@@ -1,4 +1,5 @@
 <template>
+<div class="flex flex-row">
     <form @submit.prevent="submitTrainer" ref="myForm" class="mt-3 grid grid-cols-1 grid-rows-5 items-center">
       <addTrainerLabel>Name:    
         <InputAddTrainer 
@@ -28,7 +29,7 @@
                 placeholder="example@example.com" 
             ></InputAddTrainer></addTrainerLabel>
 
-        <btn v-if="!editMode" @click="submitTrainer" class="text-2xl w-50 mx-auto mt-5">Submit</btn>
+        <btn v-if="!editMode" class="text-2xl w-50 mx-auto mt-5">Submit</btn>
         <div v-else-if="editMode " class="flex flex-col h-18 items-center">
           <btn @click="updateTrainerFunc" class="text-2xl w-50 mx-auto ">Update</btn>
           <btn @click="$emit('closeModal')" class="w-20">
@@ -37,19 +38,27 @@
         </div>
         
     </form>
+    <FormValidationErrors v-if="submit"
+    :trainerForm="trainerForm"
+    :errors = "errors"
+    ></FormValidationErrors>
+</div>
 </template>
 
 <script setup lang="ts">
-import addTrainerLabel from './addTrainerLabel.vue';
-import InputAddTrainer from './InputAddTrainer.vue';
-import btn from '../ui/Button.vue'
-
-import { computed, ref, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useTrainersStore } from '@/stores/useTrainersStore'
-import type { Trainer } from '@/interfaces/trainers.interface';
+import type { Trainer } from '@/interfaces/trainers.interface'
+import { useValidForm } from '@/composables/UseValidForm'
+import { toast } from 'vue3-toastify'
+import "vue3-toastify/dist/index.css";
 
-//Estat inicial del trainer
-const initialTrainerState = () => ({
+import addTrainerLabel from './addTrainerLabel.vue'
+import InputAddTrainer from './InputAddTrainer.vue'
+import btn from '../ui/Button.vue'
+import FormValidationErrors from '@/components/ui/FormValidationErrors.vue'
+
+const initialTrainerState = (): Trainer => ({
   id: Date.now().toString(),
   name: '',
   lastName: '',
@@ -58,56 +67,58 @@ const initialTrainerState = () => ({
   pokemon: null
 })
 
-//Defineix el prop del Trainer
-const props = defineProps<{
-  trainer?: Trainer
-}>()
 
-//Defineix un emit per a tancar la modal del form
-const emit = defineEmits<{
-  (e: 'closeModal'): void
-}>()
+const props = defineProps<{ trainer?: Trainer }>()
+const emit = defineEmits<{ (e: 'closeModal'): void }>()
 
-//Trainer form igual al estat inicial
 const trainerForm = ref<Trainer>(initialTrainerState())
+const editMode = computed(() => !!props.trainer)
+const submit = ref(false)
 
-//Inicia la store de pinia
+const { errors, isValid } = useValidForm(trainerForm)
 const trainersStore = useTrainersStore()
 
-//Modo
-const editMode = computed(() => !!props.trainer)
 
-//Vigila props.trainer per a veure quan canvia
+
 watch(
   () => props.trainer,
   (newTrainer) => {
-    if (newTrainer) {
-      trainerForm.value = { ...newTrainer } 
-    } else {
-      trainerForm.value = initialTrainerState() 
-    }
-  }
+    trainerForm.value = newTrainer ? { ...newTrainer } : initialTrainerState()
+  },
+  { immediate: true }
 )
 
-
-if (props.trainer){
-    trainerForm.value = {...props.trainer}
-}
-
-//Actualitza el trainer i tanca la modal
-function updateTrainerFunc(){
+function updateTrainerFunc() {
+  if (!isValid.value) return
   trainersStore.update(trainerForm.value)
+  toast("Trainer updated!", {
+      "theme": "colored",
+      "type": "success",
+      "position": "bottom-right",
+      "dangerouslyHTMLString": true
+  })
   emit('closeModal')
 }
 
-//Afegeix el nou trainer
-function submitTrainer(){
-  const newTrainer = {
-    ...trainerForm.value
-  }
-  trainersStore.addTrainer(newTrainer)
-
+function submitTrainer() {
+  submit.value = true
+  if (!isValid.value){
+    toast("Check the errors!", {
+      "theme": "colored",
+      "type": "error",
+      "position": "bottom-right",
+      "dangerouslyHTMLString": true
+    })
+    return
+  } 
+  toast("Trainer created!", {
+      "theme": "colored",
+      "type": "success",
+      "position": "bottom-right",
+      "dangerouslyHTMLString": true
+  })
+  trainersStore.addTrainer({ ...trainerForm.value })
   trainerForm.value = initialTrainerState()
+  submit.value=false
 }
-
 </script>

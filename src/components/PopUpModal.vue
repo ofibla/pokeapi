@@ -1,5 +1,5 @@
 <template>
-    <div class="w-screen h-screen bg-black/20 fixed flex items-center justify-center ">
+    <div class="w-screen h-screen bg-black/30 fixed flex items-center justify-center ">
         <MainDiv class=" w-90 h-130">
             <MainTitle>
                 Update trainer
