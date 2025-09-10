@@ -8,11 +8,6 @@ export function useValidForm(trainerForm: Ref<Trainer>) {
     return re.test(email)
   }
 
-  function validName(name: string, surname: string): boolean{
-    
-    if(re.test(name) && re.test(surname)) return true
-    return false
-  }
 
   const errors = computed(() => {
     const errs: string[] = []
