@@ -11,12 +11,12 @@ export default function useFetchPokemon() {
     const pokTypeName = ref<string[]>([])
     const pokTypeSprites = ref<string[]>([])
 
-    const isLoading = ref(true)
+    const isLoading = ref(false)
 
     const isError = ref(false)
     const errorCatched = ref<string>('')
 
-    async function fetchPokemon() {
+    async function fetchPokemon(){
         try {
             isLoading.value = true
             const api = axios.create({
