@@ -5,6 +5,7 @@
             v-for="trainer in trainers"
             :key="trainer.id"
             :trainer="trainer"
+            :isLoading="isLoading"
             @assign-pokemon="assignPokemonToTrainer"
             @update-trainer="updateTrainer"
             @delete-trainer="openDelete"
@@ -26,7 +27,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useTrainersStore } from '@/stores/useTrainersStore'
-import {ref} from 'vue'
+import { ref} from 'vue'
 
 import mainTitle from '../components/ui/MainTitle.vue';
 import TrainersListElement from '../components/ui/TrainersListElement.vue';
@@ -39,11 +40,17 @@ import useFetchPokemon from '@/composables/UseFetchPokemon';
 const trainersStore = useTrainersStore()
 const { trainers } = storeToRefs(trainersStore)
 
-const { fetchPokemon, pokImg }= useFetchPokemon()
+const { 
+    pokImg,
+    isLoading, 
+    fetchPokemon 
+} = useFetchPokemon()
 
 const showDelete = ref(false)
 const modal = ref(false)
 const selectedTrainer = ref<Trainer>()
+
+
 
 async function assignPokemonToTrainer(trainer: Trainer){
     await fetchPokemon()

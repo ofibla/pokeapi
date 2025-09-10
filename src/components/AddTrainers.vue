@@ -6,9 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import MainDiv from '../components/ui/MainDiv.vue'
+import MainDiv from '@/components/ui/MainDiv.vue'
 import FormTrainer from './ui/FormTrainer.vue'
 import MainTitle from './ui/MainTitle.vue'
-
 </script>
 

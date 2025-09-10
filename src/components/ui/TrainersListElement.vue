@@ -19,7 +19,7 @@
         @click="$emit('assign-pokemon', trainer)"
         class="hover:scale-110 transition-all"
       >
-        <img class="w-10" src="/src/assets/Poké_Ball_icon.svg.png" />
+        <img id="pokeBallImg" class="w-10" src="/src/assets/Poké_Ball_icon.svg.png"  :class="{ 'spin': isLoading }"/>
       </button>
       <button @click="$emit('update-trainer', trainer)" class="hover:scale-110 transition-all">
         <img class="w-10" src="/src/assets/edit.png" />
@@ -36,6 +36,7 @@ import type { Trainer } from '@/interfaces/trainers.interface'
 
 const props = defineProps<{
   trainer: Trainer
+  isLoading: boolean
 }>()
 
 const emit = defineEmits<{
@@ -43,4 +44,20 @@ const emit = defineEmits<{
   (e: 'update-trainer', trainer: Trainer): void
   (e: 'delete-trainer', trainer: Trainer): void
 }>()
+
 </script>
+<style>
+.spin {
+  animation: rotate 0.5s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+</style>

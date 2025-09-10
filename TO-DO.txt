@@ -1,1 +1,2 @@
+Add a loader when assign a pokemon to a trainer
 Fix strange error on imports    

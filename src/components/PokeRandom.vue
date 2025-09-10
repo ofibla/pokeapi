@@ -6,7 +6,7 @@
         <div class="max-h-7 flex flex-row justify-center gap-2">
             <img v-for="(type, i) in pokTypes" :src="pokTypeSprites[i]" :alt="type.type.name" class="object-cover rounded"/>
         </div>
-        <Btn @click="fetchPokemon()">New Pokemon</Btn>
+        <Btn @click="fetchPokemon()" class="mt-5">New Pokemon</Btn>
     </mainDiv>
     
     
