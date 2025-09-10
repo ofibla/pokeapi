@@ -5,7 +5,6 @@
         :value="modelValue"
         :placeholder="placeholder"
         @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-        required
         ></input>
 </template>
 
