@@ -17,7 +17,7 @@ export function useValidForm(trainerForm: Ref<Trainer>) {
   const errors = computed(() => {
     const errs: string[] = []
     const form = trainerForm.value
-    const regExNameSurname = /^[A-Za-z ]+$/
+    const regExNameSurname = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]+$/
     const regExDni = /^[0-9]{8}[A-Za-z]$/
 
     if (!form.name) errs.push('The name is required')

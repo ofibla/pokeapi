@@ -50,6 +50,8 @@ import { ref, computed, watch } from 'vue'
 import { useTrainersStore } from '@/stores/useTrainersStore'
 import type { Trainer } from '@/interfaces/trainers.interface'
 import { useValidForm } from '@/composables/UseValidForm'
+import { toast } from 'vue3-toastify'
+import "vue3-toastify/dist/index.css";
 
 import addTrainerLabel from './addTrainerLabel.vue'
 import InputAddTrainer from './InputAddTrainer.vue'
@@ -64,6 +66,7 @@ const initialTrainerState = (): Trainer => ({
   email: '',
   pokemon: null
 })
+
 
 const props = defineProps<{ trainer?: Trainer }>()
 const emit = defineEmits<{ (e: 'closeModal'): void }>()
@@ -88,12 +91,32 @@ watch(
 function updateTrainerFunc() {
   if (!isValid.value) return
   trainersStore.update(trainerForm.value)
+  toast("Trainer updated!", {
+      "theme": "colored",
+      "type": "success",
+      "position": "bottom-right",
+      "dangerouslyHTMLString": true
+  })
   emit('closeModal')
 }
 
 function submitTrainer() {
   submit.value = true
-  if (!isValid.value) return
+  if (!isValid.value){
+    toast("Check the errors!", {
+      "theme": "colored",
+      "type": "error",
+      "position": "bottom-right",
+      "dangerouslyHTMLString": true
+    })
+    return
+  } 
+  toast("Trainer created!", {
+      "theme": "colored",
+      "type": "success",
+      "position": "bottom-right",
+      "dangerouslyHTMLString": true
+  })
   trainersStore.addTrainer({ ...trainerForm.value })
   trainerForm.value = initialTrainerState()
   submit.value=false
