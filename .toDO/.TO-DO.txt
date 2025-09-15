@@ -1,0 +1,8 @@
+Verify email
+
+Add persistance to pinia
+
+Fix the isError checker 
+Style the active top page button
+
+https://www.youtube.com/watch?v=foZiwDb-YUE
