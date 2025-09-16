@@ -29,10 +29,10 @@ import { storeToRefs } from 'pinia';
 import { useTrainersStore } from '@/stores/useTrainersStore'
 import { ref} from 'vue'
 
-import mainTitle from '../components/ui/MainTitle.vue';
-import TrainersListElement from '../components/ui/TrainersListElement.vue';
-import PopUpModal from '../components/PopUpModal.vue'
-import ConfirmDelete from './ui/ConfirmDelete.vue';
+import mainTitle from '@/components/ui/MainTitle.vue';
+import TrainersListElement from '@/components/ui/TrainersListElement.vue';
+import PopUpModal from '@/components/PopUpModal.vue'
+import ConfirmDelete from '@/components/ui/ConfirmDelete.vue';
 import type { Trainer } from '@/interfaces/trainers.interface';
 import useFetchPokemon from '@/composables/UseFetchPokemon';
 

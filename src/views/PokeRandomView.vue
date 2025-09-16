@@ -13,23 +13,27 @@
 </template>
 
 <script lang="ts" setup>
-import Loading from '@components/ui/Loading.vue'
-import Btn from '@components/ui/Button.vue'
+import Loading from '@/components/ui/Loading.vue'
+import Btn from '@/components/ui/Button.vue'
 import { onMounted } from 'vue'
-import mainDiv from './ui/MainDiv.vue'
+import mainDiv from '@/components/ui/MainDiv.vue'
+import useFetchPokemon  from '@/composables/UseFetchPokemon.ts'
 
-const props = defineProps<{
-    pokImg: string,
-    pokTypes: any[],
-    pokTypeSprites: string[],
-    pokName: string,
-    isLoading: boolean,
-    fetchPokemon: () => void
-}>()
 
 onMounted(() => {
-    props.fetchPokemon()
+    fetchPokemon()
 })
+
+const {
+    pokImg, 
+    pokTypes, 
+    pokTypeSprites, 
+    pokName, 
+    isLoading,
+    isError,
+    errorCatched,
+    fetchPokemon
+} = useFetchPokemon()
 
 </script>
 

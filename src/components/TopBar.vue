@@ -5,30 +5,34 @@
             <h2> <strong>Pokedex</strong> </h2>
         </div>
         <div class="gap-10 w-2/3 flex justify-end text-gray-800 text-2xl pr-15 " >
-            <btn @click="changePage(button )" v-for="button in buttons" :class="{'scale-120': activePage === button, 'transition-transform duration-200': true}">
-                <p> {{ button }} </p>
-            </btn>  
             
+            <btn v-for="(path, label) in buttons">
+                <RouterLink :to=" path "> {{ label }} </RouterLink>
+            </btn>
+            <btn @click="userStore.logoutUser">
+                Logout
+            </btn>  
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import {ref} from 'vue'
-import btn from '@components/ui/TopBarButton.vue'
+import btn from '@/components/ui/TopBarButton.vue'
+import { RouterLink } from 'vue-router'
+import { useUserStore } from '@/stores/useUserStore'
+import TrainersList from '@/views/TrainersList.vue'
 
-const activePage = ref('Pokemon')
-const buttons = ref([
-    'Trainers',
-    'Add Trainer',
-    'Pokemon'
-])
+const userStore = useUserStore()
+
+const buttons = ref<Record<string, string>>({
+    Home:'/',
+    Trainers : '/trainers_list',
+    'Add Trainers' : '/add_trainers',
+    Pokemon: '/Pokemon'
+})
 
 const emit = defineEmits(['changePage'])
 
-function changePage(btn : string){
-    activePage.value = btn
-    emit('changePage', btn)
-}
-
 </script>
+const
