@@ -2,7 +2,7 @@
     <div class="flex flex-col items-center">
         <h1 class="text-9xl ">Hello, {{ userStore.name }}</h1>
         <btn class="max-w-60 mt-10 text-3xl">
-            <router-link to="/Trainers"> Go to Trainers</router-link>
+            <router-link to="/trainers_list"> Go to Trainers</router-link>
         </btn>
         <btn @click="userStore.logoutUser()">
             Logout
