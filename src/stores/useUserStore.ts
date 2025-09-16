@@ -7,9 +7,11 @@ export const useUserStore = defineStore('users', () => {
   const name = ref('')
   const email = ref('')
 
-  const error = ref('')
+  const errors = ref<string[]>([])
 
   const isLogged = computed(() => email.value !== '')
+
+  function clearErrors() { errors.value = [] }
 
   async function getUser() {
     const user = await Request.getUserEnd()
@@ -20,10 +22,11 @@ export const useUserStore = defineStore('users', () => {
   }
 
   async function loginUser(emailInput: string, password: string) {
+    clearErrors()
     try {
       const user = await Request.loginEnd(emailInput, password)
       if (user == null){
-        error.value = 'Could not find user'
+        errors.value.push('Could not find user')
         return false
       }
       
@@ -33,7 +36,7 @@ export const useUserStore = defineStore('users', () => {
       return true
 
     } catch (err: any) {
-      error.value = err.message || 'Could not find user'
+      errors.value.push(err.message || 'Could not find user')
     }
   }
 
@@ -46,7 +49,7 @@ export const useUserStore = defineStore('users', () => {
   return {
     name,
     email,
-    error,
+    errors,
     isLogged,
     getUser,
     loginUser,
